@@ -26,18 +26,23 @@ def collect_vocabs(train_path, with_POS=False, with_NER=False):
         line = line.decode('utf-8').strip()
         if line.startswith('-'): continue
         items = re.split("\t", line)
-        label = items[0]
-        sentence1 = re.split("\\s+",items[1].lower())
-        sentence2 = re.split("\\s+",items[2].lower())
-        all_labels.add(label)
-        all_words.update(sentence1)
-        all_words.update(sentence2)
-        if with_POS: 
-            all_POSs.update(re.split("\\s+",items[3]))
-            all_POSs.update(re.split("\\s+",items[4]))
-        if with_NER: 
-            all_NERs.update(re.split("\\s+",items[5]))
-            all_NERs.update(re.split("\\s+",items[6]))
+        # print(items)
+        # print(len(items))
+        try:
+            label = items[0]
+            sentence1 = re.split("\\s+",items[1].lower())
+            sentence2 = re.split("\\s+",items[2].lower())
+            all_labels.add(label)
+            all_words.update(sentence1)
+            all_words.update(sentence2)
+            if with_POS: 
+                all_POSs.update(re.split("\\s+",items[3]))
+                all_POSs.update(re.split("\\s+",items[4]))
+            if with_NER: 
+                all_NERs.update(re.split("\\s+",items[5]))
+                all_NERs.update(re.split("\\s+",items[6]))
+        except:
+            print(items)
     infile.close()
 
     all_chars = set()
@@ -365,12 +370,12 @@ if __name__ == '__main__':
     parser.add_argument('--context_layer_num', type=int, default=1, help='Number of LSTM layers for context representation layer.')
     parser.add_argument('--highway_layer_num', type=int, default=1, help='Number of highway layers.')
     parser.add_argument('--suffix', type=str, default='normal', required=True, help='Suffix of the model name.')
-    parser.add_argument('--fix_word_vec', default=False, help='Fix pre-trained word embeddings during training.', action='store_true')
-    parser.add_argument('--with_highway', default=False, help='Utilize highway layers.', action='store_true')
+    parser.add_argument('--fix_word_vec', default=True, help='Fix pre-trained word embeddings during training.', action='store_true')
+    parser.add_argument('--with_highway', default=True, help='Utilize highway layers.', action='store_true')
     parser.add_argument('--with_filter_layer', default=False, help='Utilize filter layer.', action='store_true')
     parser.add_argument('--word_level_MP_dim', type=int, default=-1, help='Number of perspectives for word-level matching.')
-    parser.add_argument('--with_match_highway', default=False, help='Utilize highway layers for matching layer.', action='store_true')
-    parser.add_argument('--with_aggregation_highway', default=False, help='Utilize highway layers for aggregation layer.', action='store_true')
+    parser.add_argument('--with_match_highway', default=True, help='Utilize highway layers for matching layer.', action='store_true')
+    parser.add_argument('--with_aggregation_highway', default=True, help='Utilize highway layers for aggregation layer.', action='store_true')
     parser.add_argument('--with_lex_decomposition', default=False, help='Utilize lexical decomposition features.', action='store_true')
     parser.add_argument('--lex_decompsition_dim', type=int, default=-1, help='Number of dimension for lexical decomposition features.')
     parser.add_argument('--with_POS', default=False, help='Utilize POS information.', action='store_true')

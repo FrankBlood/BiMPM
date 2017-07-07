@@ -140,7 +140,13 @@ class Vocab(object):
         self.vocab_size = len(self.word2id)
         self.word_vecs = np.zeros((self.vocab_size+1, self.word_dim), dtype=np.float32) # the last dimension is all zero
         for cur_index in xrange(self.vocab_size):
-            self.word_vecs[cur_index] = word_vecs[cur_index]
+            # print(len(self.word_vecs[cur_index]))
+            # print(len(word_vecs[cur_index]))
+            try:
+                self.word_vecs[cur_index] = word_vecs[cur_index]
+            except:
+                print(len(word_vecs[cur_index]))
+                pass
 
 
 

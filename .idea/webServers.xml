@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8ada31b4-0ad5-4d57-8ce1-974f19701d81" name="202.114.66.181" url="http://202.114.66.181">
+        <fileTransfer host="202.114.66.181" port="22" rootFolder="/home/hegx/Research/Quora_Question_Pairs/BiMPM" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
